@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Link Trái Tim</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #ea80b0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="color"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="color"] {
+            height: 50px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ea80b0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #d46b9b;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f8f8;
+            border-radius: 5px;
+            display: none;
+        }
+        .result input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .copy-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .copy-btn:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tạo Link Trái Tim</h1>
+        <div class="form-group">
+            <label for="nameInput">Tên của bạn:</label>
+            <input type="text" id="nameInput" placeholder="Nhập tên của bạn">
+        </div>
+        <div class="form-group">
+            <label for="colorPicker">Chọn màu nền:</label>
+            <input type="color" id="colorPicker" value="#000000">
+        </div>
+        <button onclick="createLink()">Tạo Link</button>
+        
+        <div class="result" id="result">
+            <h3>Link của bạn:</h3>
+            <input type="text" id="shortLink" readonly>
+            <button class="copy-btn" onclick="copyLink()">Sao chép link</button>
+        </div>
+    </div>
+
+    <script>
+        function createLink() {
+            const name = document.getElementById('nameInput').value;
+            const color = document.getElementById('colorPicker').value;
+            
+            if (!name) {
+                alert('Vui lòng nhập tên!');
+                return;
+            }
+
+            // Tạo URL với các tham số
+            const params = new URLSearchParams({
+                name: name,
+                color: color
+            });
+            
+            // Sử dụng domain GitHub Pages
+            const baseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? window.location.origin
+                : 'https://[username].github.io/[repository-name]';
+            
+            const shortLink = `${baseUrl}/heart.html?${params.toString()}`;
+            
+            // Hiển thị kết quả
+            document.getElementById('shortLink').value = shortLink;
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function copyLink() {
+            const linkInput = document.getElementById('shortLink');
+            linkInput.select();
+            document.execCommand('copy');
+            alert('Đã sao chép link!');
+        }
+    </script>
+</body>
+</html> 

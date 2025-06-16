@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #ea80b0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="color"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="color"] {
+            height: 50px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ea80b0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #d46b9b;
+        }
+        .preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Trái Tim</h1>
+        <div class="form-group">
+            <label for="nameInput">Tên của bạn:</label>
+            <input type="text" id="nameInput" placeholder="Nhập tên của bạn">
+        </div>
+        <div class="form-group">
+            <label for="colorPicker">Chọn màu nền:</label>
+            <input type="color" id="colorPicker" value="#000000">
+        </div>
+        <button onclick="openHeartPage()">Xem Trái Tim</button>
+    </div>
+
+    <script>
+        function openHeartPage() {
+            const name = document.getElementById('nameInput').value;
+            const color = document.getElementById('colorPicker').value;
+            
+            // Lưu các giá trị vào localStorage
+            localStorage.setItem('userName', name);
+            localStorage.setItem('bgColor', color);
+            
+            // Mở trang trái tim trong cửa sổ mới
+            window.open('heart.html', '_blank');
+        }
+    </script>
+</body>
+</html> 
